@@ -1,0 +1,9 @@
+FROM node:carbon
+
+WORKDIR /app
+
+COPY dist ./dist
+COPY src ./src
+COPY package.json yarn.lock ./
+RUN yarn install --pure-lockfile
+CMD ["npm", "run", "start:local"]

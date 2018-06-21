@@ -1,0 +1,18 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<form #signInForm="ngForm" (submit)="signIn(signInForm.value)">
+  <h1>Sign in</h1>
+
+  <div class="form-group">
+    <label for="inputEmail">Email address</label>
+    <input name="email" type="email" class="form-control" [class.is-invalid]="errorEmail" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" ngModel>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input name="password" type="password" class="form-control" [class.is-invalid]="errorPassword" id="inputPassword" placeholder="Password" ngModel>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>

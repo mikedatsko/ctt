@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+$primary: #007b35;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../node_modules/font-awesome/css/font-awesome.css';
+
+.app-title {
+  font-weight: bold;
+  position: relative;
+  margin-left: 10px;
+}
+
+.app-title i {
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  bottom: -17px;
+}
+
+.loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.5);
+  z-index: 9999;
+}
+
+.table {
+  table-layout: fixed;
+}
+
+td, th {
+  word-wrap: break-word;
+}
+
+.ng-invalid {
+  @extend .is-invalid;
+}

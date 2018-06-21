@@ -1,0 +1,81 @@
+<form #translationListForm="ngForm" (submit)="saveTranslation(translationListForm)">
+
+  <app-loader *ngIf="isLoading"></app-loader>
+
+  <button type="button" class="btn btn-primary float-right" (click)="toggleImportFile()">Import translations</button>
+  <button type="submit" class="btn btn-success float-right">Save translations</button>
+
+  <div class="row" *ngIf="isShowImport">
+    <div class="col-sm">
+      <select class="form-control" (change)="importLanguage = $event.target.value">
+        <option value="">- Select language -</option>
+        <option *ngFor="let language of languageList" [value]="language._id" [innerText]="language.title"></option>
+      </select>
+    </div>
+    <div class="col-sm">
+      <input class="form-control" type="file" (change)="onChangeImportFile($event)">
+    </div>
+    <div class="col-sm">
+      <button class="btn btn-success" type="button" (click)="importFile()">Import</button>
+    </div>
+  </div>
+
+  <h1>Translation list</h1>
+
+  <span *ngFor="let language of languageList" class="badge" (click)="language.isSelected = !language.isSelected">
+    <span
+      class="fa"
+      [class.fa-check-square]="language.isSelected"
+      [class.fa-square]="!language.isSelected"
+    >
+    </span>
+    {{language.title}}
+  </span>
+
+  <div class="translation-list">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" width="60">#</th>
+          <th scope="col" width="200">
+            <input
+              type="text"
+              class="form-control"
+              (input)="setOriginKeyFilter($event.target.value)"
+              placeholder="Origin key"
+            >
+          </th>
+          <th *ngFor="let language of getLanguageFilteredList()" width="300">{{language.title}}</th>
+          <th scope="col" width="60"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let originKey of getOriginKeyFilteredList(); let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{originKey.title}}</td>
+          <td *ngFor="let language of getLanguageFilteredList()">
+            <div
+              class="form-control"
+              contentEditable
+              suppressContentEditableWarning
+              (keyup)="setTranslation(originKey._id, language._id, $event.target.innerText)"
+            >
+              {{getTranslation(originKey._id, language._id)}}
+            </div>
+  
+            <input
+              type="hidden"
+              class="form-control"
+              [name]="'translation_' + originKey._id + '_' +language._id + '_' + this.getTranslationId(originKey._id, language._id)"
+              [ngModel]="getTranslation(originKey._id, language._id)"
+              ngModel
+            >
+          </td>
+          <td>
+            <button type="button" class="btn btn-sm btn-light" (click)="removeOriginKey(originKey._id)">✕</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

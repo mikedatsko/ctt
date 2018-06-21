@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="../assets/images/logo-small.png" alt="logo" height="50" class="d-inline-block align-top">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse float-right" [style.flex-grow]="0">
+      <ul class="navbar-nav mr-auto">
+        <li *ngIf="isLogged()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/translation-list']">Translations</a>
+        </li>
+        <li *ngIf="isLogged()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/language-list']">Languages</a>
+        </li>
+        <!--<li class="nav-item" routerLinkActive="active">-->
+          <!--<a class="nav-link" [routerLink]="['/origin-key-list']">Origin Keys</a>-->
+        <!--</li>-->
+        <li *ngIf="!isLogged()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/sign-in']">Sign in</a>
+        </li>
+        <li *ngIf="isLogged()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/sign-out']">Sign out</a>
+        </li>
+        <li *ngIf="!isLogged()" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/sign-up']">Sign up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <br/>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

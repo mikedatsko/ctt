@@ -1,0 +1,27 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<form #signUpForm="ngForm" (submit)="signUp(signUpForm.value)">
+  <h1>Sign up</h1>
+
+  <div class="form-group">
+    <label for="inputName">Name</label>
+    <input name="name" type="text" class="form-control" [class.is-invalid]="errorName" id="inputName" aria-describedby="nameHelp" placeholder="Enter your name" ngModel>
+    <small id="nameHelp" class="form-text text-muted">John, Dan Smith, Elen, etc.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="inputEmail">Email address</label>
+    <input name="email" type="email" class="form-control" [class.is-invalid]="errorEmail" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" ngModel required>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword">Password</label>
+    <input name="password" type="password" class="form-control" [class.is-invalid]="errorPassword" id="exampleInputPassword" placeholder="Password" ngModel required>
+  </div>
+
+  <div class="text-center">
+    <a [routerLink]="['/sign-in']" class="btn btn-outline-primary">Already registered?</a>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </div>
+</form>
