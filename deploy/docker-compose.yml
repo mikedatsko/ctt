@@ -1,0 +1,12 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./deploy/Dockerfile
+    image: ${APP_NAME}
+    container_name: ${APP_NAME}
+    ports:
+      - '${PORT}:80'
+    environment:
+      - DB=${DB}
